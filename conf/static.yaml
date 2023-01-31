@@ -1,0 +1,66 @@
+root_path: ???
+data_path: ${root_path}/data
+
+scannetv2:
+  path: ${data_path}/scannetv2
+  labels_combined_path: ${scannetv2.path}/scannetv2-labels.combined.tsv
+  raw_scans_path: /mnt/canis/Datasets/ScanNet/public/v2/scans
+
+  classes: 20
+  scale: 50
+  ignore_label: -1
+  ignore_classes: ["floor", "wall"]
+  softgroup_names: [
+      "floor",
+      "wall",
+      "cabinet",
+      "bed",
+      "chair",
+      "sofa",
+      "table",
+      "door",
+      "window",
+      "bookshelf",
+      "picture",
+      "counter",
+      "desk",
+      "curtain",
+      "refrigerator",
+      "shower curtain",
+      "toilet",
+      "sink",
+      "bathtub",
+      "otherfurniture",
+  ]
+  class_names: [
+      "cabinet",
+      "bed",
+      "chair",
+      "sofa",
+      "table",
+      "door",
+      "window",
+      "bookshelf",
+      "picture",
+      "counter",
+      "desk",
+      "curtain",
+      "refrigerator",
+      "shower curtain",
+      "toilet",
+      "sink",
+      "bathtub",
+      "others",
+  ]
+  mapping_classes_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 24, 28, 33, 34, 36, 39]
+
+scanrefer:
+  path: ${data_path}/scanrefer
+  train_split: ${scanrefer.path}/ScanRefer_filtered_train.json
+  val_split: ${scanrefer.path}/ScanRefer_filtered_val.json
+
+softgroup:
+  path: ${data_path}/softgroup
+  ckpt_path: ${data_path}/softgroup/SoftGroup_best.ckpt
+  nms_threshold: 0.3
+

@@ -1,0 +1,8 @@
+_target_: vl3d.data.datamodule.SceneDataModule
+batch_size: 16 
+num_workers: 4 
+token_max_count: 60 
+proposal_max_count: 60
+drop_sample_iou_threshold: 0.2 
+use_bbox: True
+pin_memory: True

@@ -1,0 +1,7 @@
+wandb:
+  _target_: pytorch_lightning.loggers.WandbLogger
+  project: vl3d 
+watch:
+  log: all
+  log_freq: 100
+  log_graph: False

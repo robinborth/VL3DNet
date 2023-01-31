@@ -1,0 +1,30 @@
+defaults:
+  - base
+
+mode: 1 
+
+optimizer:
+  lr: 1e-4 
+  weight_decay: 1e-3
+
+language_backbone:
+  freeze: False 
+  optimizer:
+    lr: 1e-6 
+    weight_decay: 0.0 
+
+vision_backbone:
+  norm: False
+
+vision_language_fusion:
+  act_fn: 
+    _target_: torch.nn.ReLU
+  num_blocks: 1
+  dim_mlp: 3072
+  dropout: 0.2
+
+captioning_head:
+  act_fn: 
+    _target_: torch.nn.ReLU
+  norm: True 
+  dropout: 0.2

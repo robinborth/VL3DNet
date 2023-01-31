@@ -1,0 +1,76 @@
+_target_: vl3d.model.vl3dnet.VL3DNet
+mode: ??? 
+batch_size: ${data.batch_size}
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: True
+  lr: 1e-3 
+  weight_decay: 1e-4 
+
+lr_scheduler:
+  scheduler:
+    _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+    _partial_: True
+    min_lr: 1e-7 
+    factor: 0.1
+  interval: step 
+  monitor: train/total_loss 
+  frequency: 100 
+
+
+language_backbone:
+  _target_: vl3d.model.components.language_backbone.LanguageBackbone
+  freeze: True 
+  optimizer:
+    lr: 1e-6 
+    weight_decay: 0.0 
+
+vision_backbone:
+  _target_: vl3d.model.components.vision_backbone.VisionBackbone 
+  freeze: False
+  act_fn: 
+    _target_: torch.nn.Identity
+  use_bbox: ${data.use_bbox}
+  dim: 768 
+  norm: False
+
+vision_language_fusion:
+  _target_: vl3d.model.components.vision_language_fusion.VisionLanguageFusion 
+  freeze: False
+  act_fn: 
+    _target_: torch.nn.ReLU
+  num_blocks: 1
+  dim: 768 
+  num_heads: 6
+  dim_mlp: 3072
+  dropout: 0.0
+
+grounding_head:
+  _target_: vl3d.model.components.grounding_head.VisualGroundingHead
+  freeze: False
+  act_fn: 
+    _target_: torch.nn.ReLU
+  dim: 768 
+  dim_mlp: 768
+  norm: False
+  dropout: 0.0
+
+classification_head:
+  _target_: vl3d.model.components.classification_head.ClassificationHead
+  freeze: False
+  act_fn: 
+    _target_: torch.nn.ReLU
+  dim: 768 
+  norm: False 
+  dropout: 0.0
+  num_classes: 18
+
+captioning_head:
+  _target_: vl3d.model.components.captioning_head.DenseCaptioningHead
+  freeze: False
+  act_fn: 
+    _target_: torch.nn.ReLU
+  dim: 768
+  norm: False 
+  dropout: 0.0

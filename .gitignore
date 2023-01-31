@@ -1,0 +1,41 @@
+# Env for the devcontainer
+.vscode
+
+# Python virtualenv
+.venv
+venv
+
+# Python Stuff
+.ipynb_checkpoints
+__pycache__/
+__pypackages__/
+.mypy_cache/
+.DS_Store
+
+# Tests
+.coverage
+
+# Data
+/data
+/model/pretrained
+/data/scannet/scans
+/data/scanrefer/scans
+
+# Logs / Checkpoints
+/predictions
+/scripts/predictions
+/wandb
+/lightning_logs
+/vl3d_dev
+/vl3d_grounding
+# Configurations
+conf/env.yaml
+/outputs
+/multirun
+
+# Package
+vl3d.egg-info
+
+# Hyper
+/multiruns
+/outputs

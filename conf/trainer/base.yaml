@@ -1,0 +1,19 @@
+_target_: pytorch_lightning.Trainer
+
+# accelerator
+accelerator: gpu
+num_nodes: 1
+devices: ??? 
+strategy: ddp
+
+# train
+max_epochs: 5 
+log_every_n_steps: 10
+
+# validation
+num_sanity_val_steps: 1
+check_val_every_n_epoch: 1
+val_check_interval: 0.25
+
+# others
+enable_checkpointing: True

@@ -1,0 +1,14 @@
+defaults:
+  - base
+
+# train
+max_epochs: 4
+log_every_n_steps: 1
+limit_train_batches: 10
+
+# validation
+limit_val_batches: 5 
+num_sanity_val_steps: 0
+
+# others
+enable_checkpointing: True

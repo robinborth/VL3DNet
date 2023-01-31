@@ -1,0 +1,13 @@
+general:
+  seed: 123
+  optimizer_goal: val/total_loss
+  run_dir: ${hydra:run.dir}
+  
+defaults:
+  - _self_
+  - data: save_memory 
+  - logger: wandb
+  - trainer: base 
+  - callbacks: train 
+  - eval: best
+  - model: ??? 
