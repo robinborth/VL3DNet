@@ -1,6 +1,6 @@
 # Joint Architecture for 3D Vision Language
 
-![This](docs/architecture.png)
+![Architecture](docs/architecture.png)
 
 A full transformer-based joint architecture for the visual grounding and dense captioning task.
 
@@ -64,6 +64,10 @@ To evaluate both tasks jointly use:
 ```bash
 python train.py +hparams_search=optuna
 ```
+
+## Results
+
+![Results](docs/results.png)
 
 ## License
 
