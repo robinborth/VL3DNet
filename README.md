@@ -1,6 +1,6 @@
 # Joint Architecture for 3D Vision Language
 
-<p align="center"><img src="docs/benchmark.pdf" width="600px"/></p>
+[embed]https://github.com/robinborth/VL3DNet/blob/main/docs/benchmark.pdf[/embed]
 
 A full transformer-based joint architecture for the visual grounding and dense captioning task.
 
