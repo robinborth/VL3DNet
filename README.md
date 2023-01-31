@@ -1,8 +1,8 @@
 # Joint Architecture for 3D Vision Language
 
-![Architecture](docs/architecture.png)
-
 A full transformer-based joint architecture for the visual grounding and dense captioning task.
+
+![Architecture](docs/architecture.png)
 
 ## Introduction
 
@@ -25,16 +25,19 @@ For training there are several options you can choose, depending on the task you
 which task you want to finetune.
 
 To train the visual grounding task just use:
+
 ```bash
 python train.py model=grounding
 ```
 
 To train the dense captioning task just use:
+
 ```bash
 python train.py model=captioning
 ```
 
 To train both tasks jointly use:
+
 ```bash
 python train.py model=vl3dnet
 ```
@@ -68,6 +71,14 @@ python train.py +hparams_search=optuna
 ## Results
 
 ![Results](docs/results.png)
+
+## Benchmark
+
+The benchmark for the visual grounding task:
+![Benchmark Grounding](docs/benchmark_grounding.png)
+
+The benchmark for the dense captioning task:
+![Benchmark Captioning](docs/benchmark_captioning.png)
 
 ## License
 
