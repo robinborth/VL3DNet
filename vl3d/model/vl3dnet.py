@@ -27,7 +27,6 @@ from vl3d.model.components.language_backbone import LanguageBackbone
 from vl3d.model.components.vision_backbone import VisionBackbone
 from vl3d.model.components.vision_language_fusion import VisionLanguageFusion
 from vl3d.model.utils import (
-    beam_search,
     encode_teacher_sequences,
     greedy_search,
     vision_language_attention_mask,
@@ -69,9 +68,7 @@ class VL3DNet(pl.LightningModule):
         self.grounding_head = grounding_head
         self.classification_head = classification_head
         self.captioning_head = captioning_head
-
-        # for logging the count of prediction boxxes, e.g. logged_scenes[scene_id][0] = ann_id
-        self.logged_scenes = defaultdict(list)
+ 
 
     @property
     def grounding_mode(self) -> bool:
@@ -164,12 +161,7 @@ class VL3DNet(pl.LightningModule):
             output_dict["pred_sem_label"] = output_dict["classification_logits"].argmax(dim=1)
 
         if self.captioning_mode:
-            output_dict["pred_caption_ids"] = beam_search(
-                forward=self._feed,
-                data_dict=data_dict,
-                beam_size=data_dict["pred_bboxes"].shape[0],
-            )
-            # output_dict["pred_caption_ids"] = greedy_search(forward=self._feed, data_dict=data_dict)
+            output_dict["pred_caption_ids"] = greedy_search(forward=self._feed, data_dict=data_dict)
             output_dict["pred_caption"] = self.language_backbone.batch_decode(output_dict["pred_caption_ids"])
             output_dict["gt_caption"] = self.language_backbone.batch_decode(data_dict["input_ids"])
 
@@ -257,18 +249,16 @@ class VL3DNet(pl.LightningModule):
             for name, score in grounding_metrics(output_dict):
                 self.log(f"test/{name}", score, sync_dist=True, batch_size=self.hparams.batch_size, prog_bar=True)
         if self.captioning_mode:
-            # count the predicted bboxes during testing
-            for idx, (scene_id, ann_id) in enumerate(zip(data_dict["scene_id"], data_dict["ann_id"])):
-                if ann_id not in self.logged_scenes[scene_id]:
-                    total_count = output_dict["pred_bboxes_attention_mask"].size(1)
-                    pred_bbox_count = total_count - output_dict["pred_bboxes_attention_mask"][idx].sum()
-                    self.log("test/pred_count", pred_bbox_count, reduce_fx=torch.sum, sync_dist=True)
-                    self.logged_scenes[scene_id].append(ann_id)
-
-            self.log("test/gt_count", float(len(data_dict["scene_id"])), reduce_fx=torch.sum, sync_dist=True)
             for name, score in captioning_metrics(output_dict):
                 self.log(f"test/{name}", score, sync_dist=True, batch_size=self.hparams.batch_size, prog_bar=True)
 
+            # count the predicted bboxes and gt bboxes during testing for the final metrics
+            total_count = output_dict["pred_bboxes_attention_mask"].size(1)
+            pred_bbox_count = total_count - output_dict["pred_bboxes_attention_mask"][idx].sum()
+            self.log("test/pred_count", pred_bbox_count, reduce_fx=torch.sum, sync_dist=True)
+            self.log("test/gt_count", float(len(data_dict["scene_id"])), reduce_fx=torch.sum, sync_dist=True)
+
+        # log the first scene results in wandb 
         if idx == 0:
             return output_dict
 

@@ -11,7 +11,6 @@
 - python>=3.10.6
 - cuda>=11.6
 
-
 ## Implementation Details
 
 In this project, we utilized the following libraries and tools:
@@ -22,7 +21,6 @@ In this project, we utilized the following libraries and tools:
 4) [Hydra (v1.3.1)](https://hydra.cc/): A library for managing complex experiments and configurations.
 5) [Optuna (v2.10.1)](https://optuna.org/): A library for hyperparameter optimization.
 6) [WandB (v0.13.9)](https://wandb.ai/): A tool for logging, visualizing, and managing deep learning experiments.
-
 
 ## Scripts
 
@@ -93,6 +91,7 @@ To evaluate the dense captioning task just use:
 ```
 
 To evaluate both tasks jointly use:
+
 ```bash
 . scripts/eval_vl3dnet.sh
 ```
@@ -124,12 +123,12 @@ After you get access to the checkpoints please put them into the checkpoints fol
 
 ```batch
 checkpoints
-├── best/mode=0-val_loss="...".ckpt 
-├── best/mode=0-val_loss="...".yaml
-├── best/mode=1-val_loss="...".yaml
-├── best/mode=1-val_loss="...".yaml
-├── best/mode=2-val_loss="...".yaml
-└── best/mode=2-val_loss="...".yaml
+├── best/mode=0-val_loss.ckpt 
+├── best/mode=0-val_loss.yaml
+├── best/mode=1-val_loss.ckpt
+├── best/mode=1-val_loss.yaml
+├── best/mode=2-val_loss.ckpt
+└── best/mode=2-val_loss.yaml
 ```
 
 ## License
