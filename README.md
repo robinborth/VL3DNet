@@ -33,7 +33,7 @@ for the different training/prediction modes via cli.
 
 ### Data Preperation
 
-To get the preprocessed data from softgroup please contact us.
+To get the preprocessed data from softgroup please contact us. Then you can download the data via this [link](https://drive.google.com/file/d/1Bf97LoyuUGKsB_hZS4USNmWQCNtXrqD3/view?usp=share_link).
 After you get access to the datasets please put them into the data folder like this.
 
 ```batch
