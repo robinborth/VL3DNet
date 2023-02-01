@@ -16,10 +16,11 @@ __pypackages__/
 .coverage
 
 # Data
-/data
+
 /model/pretrained
 /data/scannet/scans
 /data/scanrefer/scans
+/data/softgroup
 
 # Logs / Checkpoints
 /predictions

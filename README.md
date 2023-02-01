@@ -6,18 +6,34 @@ A full transformer-based joint architecture for the visual grounding and dense c
 
 ## Introduction
 
-We propose a novel speaker-listener architecture based on D3Net for the dense captioning (DC) and visual grounding (VG) tasks where all submodules are transformer-based. The performance of state-of-the-art speaker-listener architecture relies heavily on the shared detector, which performs poorly in distinguishing nearby instances. In addition, the only shared input of two downstream tasks is raw proposals from the detector, while the relations among them are exploited separately for captioning and grounding heads. To tackle these two problems, our contribution is two-fold: (1) Improve the initial proposals by integrating Mask3D into the detection sub-module. (2) Introduce a shared feature enhancement module before the task-specific speaker and listener, which allows one to learn the relations between proposals uniformly.
+3D visual grounding and 3D dense captioning are similar in that they both require an understanding of crossmodality relationships. Previous attempts to jointly solve these tasks have not fully exploited these relationships, instead only superficially enhancing one modality with the other. We propose a novel approach, VL3DNet, for jointly solving these two tasks. Our method utilizes a shared vision-language transformer module to enhance the vision and language modalities simultaneously, effectively exploiting the intermodal relations. Compared to previous attempts, such as D3Net and 3DJCG, our method has significant improvement in visual grounding and dense captioning.
 
 ## Requirements
 
-- python>=3.10
+- python>=3.10.6
 - cuda>=11.6
+
+
+## Implementation Details
+
+In this project, we utilized the following libraries and tools:
+
+1) [Pytorch (v1.13.1)](https://pytorch.org/): A powerful machine learning library for building and training deep learning models.
+2) [Pytorch-Lightning (v1.9.0)](https://www.pytorchlightning.ai/): A high-level library for Pytorch that simplifies model implementation and training.
+3) [Transformers (v4.25.1)](https://huggingface.co/): A collection of pre-trained language models for NLP tasks.
+4) [Hydra (v1.3.1)](https://hydra.cc/): A library for managing complex experiments and configurations.
+5) [Optuna (v2.10.1)](https://optuna.org/): A library for hyperparameter optimization.
+6) [WandB (v0.13.9)](https://wandb.ai/): A tool for logging, visualizing, and managing deep learning experiments.
 
 
 ## Scripts
 
 There are different options to run the project. Because we use hydra we can changee the configurations
 for the different training/prediction modes via cli.
+
+### Data Preperation
+
+To get the preprocessed data from softgroup please contact us.
 
 ### Training
 
@@ -27,19 +43,19 @@ which task you want to finetune.
 To train the visual grounding task just use:
 
 ```bash
-python train.py model=grounding
+. scripts/train_grounding.sh
 ```
 
 To train the dense captioning task just use:
 
 ```bash
-python train.py model=captioning
+. scripts/train_captioning.sh
 ```
 
 To train both tasks jointly use:
 
 ```bash
-python train.py model=vl3dnet
+. scripts/train_vl3dnet.sh
 ```
 
 ### Evaluating
@@ -53,6 +69,7 @@ To evaluate the visual grounding task just use:
 ```
 
 To evaluate the dense captioning task just use:
+
 ```bash
 . scripts/eval_captioning.sh
 ```
@@ -75,10 +92,22 @@ python train.py +hparams_search=optuna
 ## Benchmark
 
 The benchmark for the visual grounding task:
+
 ![Benchmark Grounding](docs/benchmark_grounding.png)
 
 The benchmark for the dense captioning task:
+
 ![Benchmark Captioning](docs/benchmark_captioning.png)
+
+## Checkpoints
+
+We share our checkpoints together with the configurations that are used
+during training.
+
+- Visual Grounding: [ckpt]()
+- Dense Captioning: [ckpt]()
+- Joint Training: [ckpt]() 
+
 
 ## License
 
