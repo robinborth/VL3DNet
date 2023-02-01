@@ -34,6 +34,26 @@ for the different training/prediction modes via cli.
 ### Data Preperation
 
 To get the preprocessed data from softgroup please contact us.
+After you get access to the datasets please put them into the data folder like this.
+
+```batch
+data
+├── scanrefer
+│   ├── ScanRefer_filtered.json
+│   ├── ScanRefer_filtered_train.json
+│   ├── ScanRefer_filtered_train.txt
+│   ├── ScanRefer_filtered_val.json
+│   └── ScanRefer_filtered_val.txt
+└── softgroup
+    ├── train
+    │   ├── scene0000_00.pth
+    │   ├── scene0001_00.pth
+    │   ├── ...
+    └── val 
+        ├── scene0000_00.pth
+        ├── scene0001_00.pth
+        └── ...
+```
 
 ### Training
 
@@ -101,14 +121,19 @@ The benchmark for the dense captioning task:
 
 ## Checkpoints
 
-We share our checkpoints together with the configurations that are used
-during training.
+To get the checkpoints from vl3dnet download them via the provided [link](https://drive.google.com/file/d/1O0yPXXmQ088JBF7tNChJNU8DsEbXWosj/view?usp=share_link).
+After you get access to the checkpoints please put them into the checkpoints folder like this.
 
-- Visual Grounding: [ckpt]()
-- Dense Captioning: [ckpt]()
-- Joint Training: [ckpt]() 
-
+```batch
+checkpoints
+├── best/mode=0-val_loss="...".ckpt 
+├── best/mode=0-val_loss="...".yaml
+├── best/mode=1-val_loss="...".yaml
+├── best/mode=1-val_loss="...".yaml
+├── best/mode=2-val_loss="...".yaml
+└── best/mode=2-val_loss="...".yaml
+```
 
 ## License
 
-Copyright (c) 2022 Yaomengxi Han, Robin Borth
+Copyright (c) 2023 [Yaomengxi Han](https://github.com/Maxcharm), Robin Borth

@@ -1,5 +1,12 @@
 """
-The main script where the VL3DNet is trained with.
+This is a script that performs model evaluation.
+The script uses the Hydra library for configuration management and PyTorch Lightning as the
+training framework. The evaluation is performed on a pre-trained model and its results are
+saved to a csv file. The script performs different evaluations based on the mode selected,
+which could be object detection, caption generation, or both. The script loads a checkpoint
+of the pre-trained model and configuration, then initializes the data, model, and trainer,
+and performs the evaluation. The evaluation results are saved in a dataframe, which is then
+saved as a csv file. The script also prints out the evaluation metrics in a readable format.
 """
 from os import listdir
 
@@ -18,11 +25,11 @@ def run(cfg: DictConfig) -> None | float:
 
     print("==> load the checkpoint...")
     checkpoint, cfg_ckpt = None, None
-    for ckpt in listdir("outputs"):
+    for ckpt in listdir("checkpoints"):
         if ckpt.startswith(f"{cfg.eval.ckpt}:mode={cfg.eval.mode}") and ckpt.endswith(".ckpt"):
-            checkpoint = torch.load(f"outputs/{ckpt}")
+            checkpoint = torch.load(f"checkpoints/{ckpt}")
         if ckpt.startswith(f"{cfg.eval.ckpt}:mode={cfg.eval.mode}") and ckpt.endswith(".yaml"):
-            cfg_ckpt = OmegaConf.load(f"outputs/{ckpt}")
+            cfg_ckpt = OmegaConf.load(f"checkpoints/{ckpt}")
     if checkpoint is None or cfg_ckpt is None:
         raise Exception(f"No checkpoint for the current mode={cfg.model.mode}")
 

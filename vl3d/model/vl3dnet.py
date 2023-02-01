@@ -1,5 +1,11 @@
 """
-The task specific module for visual grounding.
+This code implements a Visual-Language 3D (VL3D) Network using PyTorch Lightning.
+The network is designed for visual grounding, i.e. localizing the objects in an image
+based on textual descriptions, and joint image-text generation tasks (captioning).
+The VL3D network is composed of multiple components including a language backbone,
+vision backbone, vision-language fusion, grounding head, classification head, and
+captioning head. The model's components are passed in as parameters during instantiation.
+The code also contains logging methods to store scene predictions.
 """
 
 
