@@ -1,7 +1,5 @@
 # Joint Architecture for 3D Vision Language
 
-A full transformer-based joint architecture for the visual grounding and dense captioning task.
-
 ![Architecture](docs/architecture.png)
 
 ## Introduction
